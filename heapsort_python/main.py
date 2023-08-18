@@ -2,6 +2,13 @@ m = list(map(int, input().split()))
 heapsize = len(m) - 1
 
 
+def parent(i):
+    if i % 2 == 0:
+        return i//2 - 1
+    else:
+        return i//2
+
+
 def left(i):
     return 2*i + 1
 
