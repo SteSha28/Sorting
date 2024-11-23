@@ -1,7 +1,7 @@
 data = list(map(int, input().split()))
 
 
-def mergesort(arr):
+def mergesort(arr: list) -> list:
     if len(arr) <= 1:
         return arr
     middle = len(arr) // 2
@@ -10,7 +10,7 @@ def mergesort(arr):
     return merge(left, right)
 
 
-def merge(left, right):
+def merge(left: list, right: list) -> list:
     i, j = 0, 0
     res = []
     while i < len(left) and j < len(right):
