@@ -1,30 +1,29 @@
 data = list(map(int, input().split()))
 
 
-def merge(arr, left, middle, right):
-    temp1 = list('0' * (middle - left + 1))
-    temp2 = list('0' * (right - middle))
-    for i in range(0, len(arr)):
-        if i <= middle:
-            temp1[i] = arr[i]
-        else:
-            temp2[i] = arr[i]
+def mergesort(arr):
+    if len(arr) <= 1:
+        return arr
+    middle = len(arr) // 2
+    left = mergesort(arr[:middle])
+    right = mergesort(arr[middle:])
+    return merge(left, right)
+
+
+def merge(left, right):
     i, j = 0, 0
-    for k in range(0, len(arr)):
-        if temp1[i] <= temp2[i]:
-            arr[k] = temp1[i]
+    res = []
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            res.append(left[i])
             i += 1
         else:
-            arr[k] = temp2[j]
+            res.append(right[j])
             j += 1
 
-
-def mergesort(arr, left, right):
-    if left < right:
-        middle = (left + right) // 2
-        mergesort(arr, left, middle)
-        mergesort(arr, middle + 1, right)
-        merge(arr, left, middle, right)
+    res.extend(left[i:])
+    res.extend(right[j:])
+    return res
 
 
-print(mergesort(data, 0, len(data)-1))
+print(mergesort(data))
